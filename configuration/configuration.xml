@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Environment>
+    <!--General-->
+    <ImplicitlyWait>10</ImplicitlyWait>
+    <WaitForElement>30</WaitForElement>
+    <ScreenshotsPath>./allure-screen-shots/</ScreenshotsPath>
+
+    <!--Web-->
+    <Browser>Chrome</Browser>
+    <Url>https://bpholter.stage.bio-beat.cloud/</Url>
+
+
+    <!-- Mobile -->
+    <Operating_System>Android</Operating_System>
+    <UDID>RFCX305CQCA</UDID>
+    <App_Package>com.atidcollege.bugtracker</App_Package>
+    <App_Activity>com.atidcollege.bugtracker.MainActivity</App_Activity>
+    <Bundle_ID>com.atidcollege.bugtracker</Bundle_ID>
+    <Appium_Server>http://localhost:4723/wd/hub</Appium_Server>
+
+       <!-- API -->
+    <API_Url>https://reqres.in/api</API_Url>
+
+
+    <!-- Electron -->
+    <Electron_App>C:/Users/lenovo/AppData/Local/Programs/todolist/Todolist.exe</Electron_App>
+    <Electron_Driver>C:/Full Stack Automation Project/electrondriver.exe</Electron_Driver>
+
+    <!-- Desktop -->
+    <Application_Name>Microsoft.WindowsCalculator_8wekyb3d8bbwe!App</Application_Name>
+    <WinAppDriver_Service>http://127.0.0.1:4723</WinAppDriver_Service>
+
+    <!-- Database -->
+    <DB_Path>C:\Full Stack Automation Project\Full_Stack_Automation_Project\db_files\db_store.db</DB_Path>
+</Environment>
+
+
