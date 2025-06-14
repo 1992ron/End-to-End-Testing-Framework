@@ -6,7 +6,6 @@ import selenium
 from appium.webdriver.common.touch_action import TouchAction
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.event_firing_webdriver import EventFiringWebDriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
@@ -15,20 +14,15 @@ from selenium import webdriver
 import appium.webdriver
 from utilities.common_ops import get_configuration_data
 
-# from from utilities.web_event_listener import EventListener
 
 driver = None
 action = None
 db_connector = None
 
 
-# This function initialize the web driver
+# This function initializes the web driver
 @pytest.fixture(scope='class')
 def init_web_driver(request):
-    # There is a bug in EvetFiringWebDriver, it doesn't work with Action Chains because it returns FiringElement instead of WebElement
-    # event_driver = get_web_driver()
-    # globals()['driver'] = EventFiringWebDriver(event_driver, EventListener())
-
     globals()['driver'] = get_web_driver()
     driver = globals()['driver']
     # Configure the WebDriver instance
@@ -41,7 +35,7 @@ def init_web_driver(request):
     driver.quit()
 
 
-# This function initialize the mobile driver
+# This function initializes the mobile driver
 @pytest.fixture(scope='class')
 def init_mobile_driver(request):
     globals()['driver'] = get_mobile_driver()
@@ -55,7 +49,7 @@ def init_mobile_driver(request):
     driver.quit()
 
 
-# This function initialize the electron driver
+# This function initializes the electron driver
 @pytest.fixture(scope='class')
 def init_electron_driver(request):
     globals()['driver'] = get_electron_driver()
@@ -69,7 +63,7 @@ def init_electron_driver(request):
     driver.quit()
 
 
-# This function initialize the desktop driver for windows (WinAppDriver)
+# This function initializes the desktop driver for windows (WinAppDriver)
 @pytest.fixture(scope='class')
 def init_desktop_driver(request):
     globals()['driver'] = get_desktop_driver()
@@ -81,7 +75,7 @@ def init_desktop_driver(request):
     driver.quit()
 
 
-# This function initialize the sql connection for sqlite
+# This function initializes the sql connection for sqlite
 @pytest.fixture(scope='class')
 def init_db_connection(request):
     db_connector = sqlite3.connect(get_configuration_data("DB_Path"))

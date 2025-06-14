@@ -29,10 +29,14 @@ temperature_converter_page = None
 
 
 ##########################################################################################################
-# This class contains functions that initiate all the page objects, so they can be used across the project
+# This class contains methods that initiate all the page objects, so they can be used across the project
 ##########################################################################################################
 
 class ManagePages:
+
+    # @staticmethod
+    # def init_web_pages():
+    #     globals()['']
 
     @staticmethod
     def init_mobile_pages():

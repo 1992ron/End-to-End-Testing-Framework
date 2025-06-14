@@ -7,7 +7,7 @@
 
     <!--Web-->
     <Browser>Chrome</Browser>
-    <Url>https://bpholter.stage.bio-beat.cloud/</Url>
+    <Url>https://www.saucedemo.com/</Url>
 
 
     <!-- Mobile -->
@@ -19,7 +19,7 @@
     <Appium_Server>http://localhost:4723/wd/hub</Appium_Server>
 
        <!-- API -->
-    <API_Url>https://reqres.in/api</API_Url>
+    <API_Url>https://jsonplaceholder.typicode.com"</API_Url>
 
 
     <!-- Electron -->

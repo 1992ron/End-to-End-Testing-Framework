@@ -5,7 +5,7 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-BASE_URL = "https://reqres.in/api"
+BASE_URL = "https://jsonplaceholder.typicode.com"
 
 
 class ApiActions:
