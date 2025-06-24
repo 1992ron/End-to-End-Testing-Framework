@@ -1,7 +1,5 @@
 import allure
 import pytest
-import utilities.manage_pages as page_objects
-from extensions.mobile_actions import MobileActions
 from workflows.mobile_flows import MobileFlows
 
 

@@ -5,6 +5,7 @@ import pytest
 import selenium
 from appium.webdriver.common.touch_action import TouchAction
 from selenium.webdriver import ActionChains
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
@@ -12,8 +13,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from utilities.manage_pages import ManagePages
 from selenium import webdriver
 import appium.webdriver
-from utilities.common_ops import get_configuration_data
-
+from utilities.common_ops import get_configuration_data, get_timestamp
 
 driver = None
 action = None
@@ -132,10 +132,25 @@ def get_desktop_driver():
 
 # This function returns the chrome driver, the get_web_driver function uses this function
 def get_chrome():
-    service = Service(ChromeDriverManager().install())
-    chrome_driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
-    return chrome_driver
+    # 1) Build ChromeOptions to suppress both the normal password UI and the "unsafe password" alert
+    chrome_opts = Options()
+    prefs = {
+        "credentials_enable_service": False,              # turn off the normal password manager UI
+        "profile.password_manager_enabled": False,        # ditto
+        "profile.password_manager_leak_detection": False  # ✏️ suppress the data-breach warning
+    }
+    chrome_opts.add_experimental_option("prefs", prefs)
 
+    # 2) Disable the underlying feature entirely
+    chrome_opts.add_argument("--disable-features=PasswordLeakDetection")
+    chrome_opts.add_argument("--disable-notifications")
+
+    # 3) Instantiate
+    driver_path = ChromeDriverManager().install()
+    return webdriver.Chrome(
+        executable_path=driver_path,
+        chrome_options=chrome_opts
+    )
 
 # This function returns the firefox driver, the get_web_driver function uses this function
 def get_firefox():

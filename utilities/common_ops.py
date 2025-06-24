@@ -47,7 +47,8 @@ def wait(condition: ExpectedConditions, elem, *args):
 # This function extracts value from the xml configuration file. It receives a string parameter - node_name and returns
 # the value of that parameter
 def get_configuration_data(node_name):
-    root = ET.parse("C:/Automation/ABPM_WEB_autoQA/configuration/configuration.xml").getroot()
+    root = ET.parse(
+        "C:/Full Stack Automation Project/Full_Stack_Automation_Project/configuration/configuration.xml").getroot()
     return root.find(".//" + node_name).text
 
 

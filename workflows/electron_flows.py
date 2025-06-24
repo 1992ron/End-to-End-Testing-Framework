@@ -3,7 +3,7 @@ import time
 import test_cases.conftest as conftest
 import allure
 from selenium.webdriver.common.keys import Keys
-import page_objects.electron_objects.task_page as task_page
+import page_objects.electron_objects.electron_task_page as task_page
 import utilities.manage_pages as page_objects
 from extensions.ui_actions import UiActions
 from utilities.common_ops import wait, ExpectedConditions

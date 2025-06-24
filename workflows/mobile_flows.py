@@ -7,9 +7,9 @@ from extensions.mobile_actions import MobileActions
 from extensions.verifications import Verifications
 import test_cases.conftest as conftest
 from utilities.common_ops import wait, ExpectedConditions
-import mobile_objects.mobile_create_bug_page as create_bug
-import mobile_objects.mobile_view_bugs_page as view_bugs
-import mobile_objects.mobile_edit_bug_page as edit_bug
+import page_objects.mobile_objects.mobile_create_bug_page as create_bug
+import page_objects.mobile_objects.mobile_view_bugs_page as view_bugs
+import page_objects.mobile_objects.mobile_edit_bug_page as edit_bug
 from enum import Enum
 
 

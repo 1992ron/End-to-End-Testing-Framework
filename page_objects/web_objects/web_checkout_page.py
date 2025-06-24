@@ -6,6 +6,7 @@ postal_code_field = (By.ID, "postal-code")
 continue_button = (By.ID, "continue")
 finish_button = (By.ID, "finish")
 success_message = (By.CLASS_NAME, "complete-header")
+checkout_summary_container = (By.CLASS_NAME, "checkout_summary_container")
 
 
 class CheckoutPage:
@@ -29,3 +30,6 @@ class CheckoutPage:
 
     def get_success_message(self):
         return self.driver.find_element(success_message[0], success_message[1])
+
+    def get_checkout_summary_container(self):
+        return self.driver.find_element(checkout_summary_container[0], checkout_summary_container[1])
