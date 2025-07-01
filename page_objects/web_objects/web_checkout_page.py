@@ -7,6 +7,7 @@ continue_button = (By.ID, "continue")
 finish_button = (By.ID, "finish")
 success_message = (By.CLASS_NAME, "complete-header")
 checkout_summary_container = (By.CLASS_NAME, "checkout_summary_container")
+checkout_error_message = (By.CSS_SELECTOR, "[data-test='error']")
 
 
 class CheckoutPage:
@@ -33,3 +34,6 @@ class CheckoutPage:
 
     def get_checkout_summary_container(self):
         return self.driver.find_element(checkout_summary_container[0], checkout_summary_container[1])
+
+    def get_checkout_error_message(self):
+        return self.driver.find_element(checkout_error_message[0], checkout_error_message[1])

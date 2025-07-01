@@ -1,7 +1,6 @@
 import allure
 import pytest
 import utilities.manage_pages as page_objects
-# from page_objects.web_objects.web_checkout_page import CheckoutPage
 from extensions.verifications import Verifications
 from workflows.web_flows import WebFlows
 
@@ -13,14 +12,14 @@ class TestWebFunctionality:
     @allure.description("Verify that a user can log in and then log out successfully")
     def test_login_logout(self):
         # Log in with valid credentials
-        WebFlows.login("standard_user", "secret_sauce")
+        WebFlows.submit_login_credentials("standard_user", "secret_sauce")
         # Then log out
         WebFlows.logout()
 
     @allure.title("Add 2 items then remove one")
     @allure.description("Add two items to the cart, remove one via inventory page, and verify badge count")
     def test_add_two_and_remove_one_inventory(self):
-        WebFlows.login("standard_user", "secret_sauce")
+        WebFlows.submit_login_credentials("standard_user", "secret_sauce")
 
         # Add two distinct items
         WebFlows.add_backpack_to_cart()
@@ -35,7 +34,7 @@ class TestWebFunctionality:
     @allure.title("Add three items and verify cart count")
     @allure.description("Add three items to the cart and assert that the badge shows '3'")
     def test_add_three_and_verify_cart_count(self):
-        WebFlows.login("standard_user", "secret_sauce")
+        WebFlows.submit_login_credentials("standard_user", "secret_sauce")
 
         # Add three items
         WebFlows.add_backpack_to_cart()
@@ -57,7 +56,7 @@ class TestWebFunctionality:
     3) Verify final thank-you message  
     """)
     def test_complete_single_item_purchase_flow(self):
-        WebFlows.login("standard_user", "secret_sauce")
+        WebFlows.submit_login_credentials(page_objects.web_login_page.valid_username, page_objects.web_login_page.valid_password)
         # Add single item
         WebFlows.add_backpack_to_cart()
         # Go through the checkout flow
@@ -71,7 +70,7 @@ class TestWebFunctionality:
     @allure.title("Remove item from checkout page")
     @allure.description("Add an item, navigate to checkout, remove it there and verify it’s gone")
     def test_remove_item_from_checkout(self):
-        WebFlows.login("standard_user", "secret_sauce")
+        WebFlows.submit_login_credentials("standard_user", "secret_sauce")
         # Add and navigate to checkout
         WebFlows.add_backpack_to_cart()
         WebFlows.go_to_cart()
@@ -82,7 +81,7 @@ class TestWebFunctionality:
     @allure.title("Attempt remove without items (Edge Case)")
     @allure.description("Calling remove on an empty cart should not error and should leave badge hidden")
     def test_remove_without_items_inventory(self):
-        WebFlows.login("standard_user", "secret_sauce")
+        WebFlows.submit_login_credentials("standard_user", "secret_sauce")
 
         # Cart is empty - attempt removal
         WebFlows.remove_item_from_inventory()

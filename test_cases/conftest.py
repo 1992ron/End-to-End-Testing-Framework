@@ -135,8 +135,8 @@ def get_chrome():
     # 1) Build ChromeOptions to suppress both the normal password UI and the "unsafe password" alert
     chrome_opts = Options()
     prefs = {
-        "credentials_enable_service": False,              # turn off the normal password manager UI
-        "profile.password_manager_enabled": False,        # ditto
+        "credentials_enable_service": False,  # turn off the normal password manager UI
+        "profile.password_manager_enabled": False,  # ditto
         "profile.password_manager_leak_detection": False  # ✏️ suppress the data-breach warning
     }
     chrome_opts.add_experimental_option("prefs", prefs)
@@ -151,6 +151,7 @@ def get_chrome():
         executable_path=driver_path,
         chrome_options=chrome_opts
     )
+
 
 # This function returns the firefox driver, the get_web_driver function uses this function
 def get_firefox():

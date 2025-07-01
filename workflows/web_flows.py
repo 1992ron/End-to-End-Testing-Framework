@@ -23,7 +23,7 @@ class WebFlows:
 
     @staticmethod
     @allure.step("Perform login to SauceDemo")
-    def login(username, password):
+    def submit_login_credentials(username, password):
         # Always navigate to the login page
         conftest.driver.get(get_configuration_data('Url'))
         # Enter username
@@ -37,6 +37,53 @@ class WebFlows:
         # Verify inventory container is visible
         Verifications.element_is_displayed(page_objects.web_inventory_page.get_inventory_container())
         logging.info("Login successful – inventory page is displayed")
+
+    @staticmethod
+    @allure.step("Login attempt without entering a username")
+    def login_without_username():
+        WebFlows.go_to_login_page()
+        # Enter the password
+        UiActions.update_text(page_objects.web_login_page.get_password_field(), "secret_sauce")
+        # Click the login button
+        UiActions.click(page_objects.web_login_page.get_login_button())
+        error = page_objects.web_login_page.get_login_error_message().text
+        # Verify the correct error message is displayed
+        Verifications.verify_object_comparison("Epic sadface: Username is required", error)
+        logging.info("Correct error message is displayed - 'Epic sadface: Username is required'")
+
+    @staticmethod
+    @allure.step("Login attempt without entering a password")
+    def login_without_password():
+        WebFlows.go_to_login_page()
+        # Enter the username
+        UiActions.update_text(page_objects.web_login_page.get_username_field(), "standard_user")
+        # Click the login button
+        UiActions.click(page_objects.web_login_page.get_login_button())
+        error = page_objects.web_login_page.get_login_error_message().text
+        # Verify the correct error message is displayed
+        Verifications.verify_object_comparison("Epic sadface: Password is required", error)
+        logging.info("Correct error message is displayed: 'Epic sadface - Password is required'")
+
+    @staticmethod
+    @allure.step("Login attempt with a locked out user")
+    def login_locked_out_user():
+        WebFlows.go_to_login_page()
+        # Enter the username
+        UiActions.update_text(page_objects.web_login_page.get_username_field(), "locked_out_user")
+        # Enter the password
+        UiActions.update_text(page_objects.web_login_page.get_password_field(), "secret_sauce")
+        # Click the login button
+        UiActions.click(page_objects.web_login_page.get_login_button())
+        error = page_objects.web_login_page.get_login_error_message().text
+        # Verify the correct error message is displayed
+        Verifications.verify_object_comparison("Epic sadface: Sorry, this user has been locked out.", error)
+        logging.info("Correct error message is displayed - 'Epic sadface: Sorry, this user has been locked out.'")
+
+    @staticmethod
+    @allure.step("Navigate to the login page")
+    def go_to_login_page():
+        conftest.driver.get(get_configuration_data("Url"))
+        wait(ExpectedConditions.ELEMENT_IS_VISIBLE, web_login_page.login_button)
 
     @staticmethod
     @allure.step("Logout from SauceDemo")
@@ -159,9 +206,7 @@ class WebFlows:
         wait(ExpectedConditions.ELEMENT_IS_VISIBLE,
              web_cart_page.cart_list_container)
         # Verify the cart page is displayed
-        Verifications.element_is_displayed(
-            page_objects.web_cart_page.get_checkout_button()
-        )
+        Verifications.element_is_displayed(page_objects.web_cart_page.get_checkout_button())
         logging.info("Navigated to cart page")
 
     @staticmethod
@@ -176,13 +221,36 @@ class WebFlows:
         logging.info("Proceeded to checkout step one")
 
     @staticmethod
-    @allure.step("Fill checkout information")
+    @allure.step("Fill all the checkout fields")
     def fill_checkout_form(first_name, last_name, postal_code):
         # Enter first name, last name, and postal code
         UiActions.update_text(page_objects.web_checkout_page.get_first_name_field(), first_name)
         UiActions.update_text(page_objects.web_checkout_page.get_last_name_field(), last_name)
         UiActions.update_text(page_objects.web_checkout_page.get_postal_code_field(), postal_code)
         logging.info("Checkout form filled: %s %s %s", first_name, last_name, postal_code)
+
+    @staticmethod
+    @allure.step("Fill the checkout form without first name")
+    def checkout_without_first_name():
+        UiActions.click(page_objects.web_checkout_page.get_continue_button())
+        first_name_missing_error = page_objects.web_checkout_page.get_checkout_error_message().text
+        Verifications.verify_object_comparison("Error: First Name is required", first_name_missing_error)
+
+    @staticmethod
+    @allure.step("Fill the checkout form without last name")
+    def checkout_without_last_name():
+        UiActions.update_text(page_objects.web_checkout_page.get_first_name_field(), "Jane")
+        UiActions.click(page_objects.web_checkout_page.get_continue_button())
+        last_name_missing_error = page_objects.web_checkout_page.get_checkout_error_message().text
+        Verifications.verify_object_comparison("Error: Last Name is required",last_name_missing_error)
+
+    @staticmethod
+    @allure.step("Fill the checkout form without postal code")
+    def checkout_without_postal_code():
+        UiActions.update_text(page_objects.web_checkout_page.get_last_name_field(), "Doe")
+        UiActions.click(page_objects.web_checkout_page.get_continue_button())
+        postal_code_missing_error = page_objects.web_checkout_page.get_checkout_error_message().text
+        Verifications.verify_object_comparison("Error: Postal Code is required", postal_code_missing_error)
 
     @staticmethod
     @allure.step("Continue to checkout overview")
@@ -277,7 +345,7 @@ class WebFlows:
     def empty_cart():
         """
         Removes every item from the inventory page cart badge
-        until the badge disappears  (cart is empty).
+        until the badge disappears (cart is empty).
         """
         # locator tuple for the little badge
         badge_locator = web_inventory_page.shopping_cart_badge
@@ -291,7 +359,7 @@ class WebFlows:
             # click the first remove
             UiActions.click(remove_buttons[0])
 
-            # wait for that button to go stale (i.e. removed from the DOM)
+            # wait for that button to go stale
             WebDriverWait(
                 conftest.driver,
                 int(get_configuration_data('WaitForElement'))
@@ -299,10 +367,7 @@ class WebFlows:
 
         # finally, wait for the badge itself to vanish
         try:
-            WebDriverWait(
-                conftest.driver,
-                int(get_configuration_data('WaitForElement'))
-            ).until(EC.invisibility_of_element_located((badge_locator[0], badge_locator[1])))
+            wait(ExpectedConditions.ELEMENT_IS_INVISIBLE, web_inventory_page.shopping_cart_badge)
             logging.info("Cart emptied successfully – badge is gone.")
         except TimeoutException:
             logging.error("Cart badge still visible after cleanup!")

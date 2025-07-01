@@ -6,6 +6,11 @@ password_field = (By.ID, "password")
 login_button = (By.ID, "login-button")
 login_error_message = (By.CSS_SELECTOR, "[data-test='error']")
 
+# Login credentials
+valid_username = "standard_user"
+valid_password = "secret_sauce"
+disabled_user = "locked_out_user"
+
 
 class LoginPage:
     def __init__(self, driver):
@@ -20,5 +25,5 @@ class LoginPage:
     def get_login_button(self):
         return self.driver.find_element(login_button[0], login_button[1])
 
-    def get_error_message(self):
+    def get_login_error_message(self):
         return self.driver.find_element(login_error_message[0], login_error_message[1])
