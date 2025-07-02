@@ -8,6 +8,9 @@
     <!--Web-->
     <Browser>Chrome</Browser>
     <Url>https://www.saucedemo.com/</Url>
+    <username>standard_user</username>
+    <password>secret_sauce</password>
+    <disabled_user>locked_out_user</disabled_user>
 
 
     <!-- Mobile -->
