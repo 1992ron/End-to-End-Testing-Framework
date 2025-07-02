@@ -17,7 +17,7 @@ This project demonstrates a smart, modular automation infrastructure in six “F
 
 This repository implements a reusable, config-driven automation framework that exercises every layer of a typical enterprise application:
 
-- **Web** (Selenium 3.x)  
+- **Web** (Selenium)  
 - **Mobile** (Appium)  
 - **API** (REST)  
 - **Database** (SQL validations)  
@@ -46,7 +46,7 @@ Each platform has its own **Flows** module that abstracts low-level interactions
 ## Tools & Frameworks
 
 - **PyTest** – Test runner & framework  
-- **Selenium 3.x** / **Appium** – Web & Mobile automation  
+- **Selenium** / **Appium** – Web & Mobile automation  
 - **WinAppDriver** / **ElectronDriver** – Desktop & Electron automation  
 - **Requests** – API testing  
 - **SQLite (DB-Browser)** – Simple local data source  
@@ -68,4 +68,7 @@ All settings live in **XML** (`configuration/configuration.xml`). Here’s an ex
     <!-- Web -->
     <Browser>Chrome</Browser>
     <Url>https://www.saucedemo.com/</Url>
+    <username>standard_user</username>
+    <password>secret_sauce</password>
+    <disabled_user>locked_out_user</disabled_user>
 </Environment>
