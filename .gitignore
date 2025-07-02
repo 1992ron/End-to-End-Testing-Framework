@@ -14,3 +14,4 @@ allure-results/
 *.pyc
 *.json
 
+/allure-report
