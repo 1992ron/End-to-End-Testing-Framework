@@ -6,11 +6,6 @@ password_field = (By.ID, "password")
 login_button = (By.ID, "login-button")
 login_error_message = (By.CSS_SELECTOR, "[data-test='error']")
 
-# Login credentials
-valid_username = "standard_user"
-valid_password = "secret_sauce"
-disabled_user = "locked_out_user"
-
 
 class LoginPage:
     def __init__(self, driver):

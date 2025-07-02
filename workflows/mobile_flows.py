@@ -180,7 +180,7 @@ class MobileFlows:
     def filter_bugs_by_status(expected_status: str):
         """
         Test that filtering bugs by status correctly updates the displayed bug list.
-        param expected_status: The status to filter by (e.g., "open", "fixed", "closed")
+        param expected_status: The status to filter by (e.g. "open", "fixed", "closed")
         """
 
         # Locate the bug list container (ensures we only look inside this section)

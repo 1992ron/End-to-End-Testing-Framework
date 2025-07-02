@@ -11,7 +11,6 @@ import page_objects.web_objects.web_cart_page as web_cart_page
 import page_objects.web_objects.web_checkout_page as web_checkout_page
 import page_objects.web_objects.web_login_page as web_login_page
 import page_objects.web_objects.web_inventory_page as web_inventory_page
-import page_objects.web_objects.web_complete_page as web_complete_page
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from utilities.common_ops import get_configuration_data
