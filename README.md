@@ -90,7 +90,7 @@ All settings live in **XML** (`configuration/configuration.xml`). Here’s an ex
 ## Example Test Scenario
 
 ```python
- @allure.title("Login and logout")
+    @allure.title("Login and logout")
     @allure.description("Verify that a user can log in and then log out successfully")
     def test_login_logout(self):
         # Log in with valid credentials
