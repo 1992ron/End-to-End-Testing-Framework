@@ -17,7 +17,7 @@ pipeline {
         stage('Web Tests') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    bat 'pytest test_cases/web_tests/ --alluredir=allure-results/web'
+                    bat 'pytest test_cases/web_tests/ --alluredir=allure-results'
                 }
             }
         }
@@ -25,7 +25,7 @@ pipeline {
         stage('API Tests') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    bat 'pytest test_cases/api_tests/ --alluredir=allure-results/api'
+                    bat 'pytest test_cases/api_tests/ --alluredir=allure-results'
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
         stage('Database Tests') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    bat 'pytest test_cases/db_tests/ --alluredir=allure-results/db'
+                    bat 'pytest test_cases/db_tests/ --alluredir=allure-results'
                 }
             }
         }
@@ -43,7 +43,7 @@ pipeline {
         stage('Mobile Tests') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    bat 'pytest test_cases/mobile_tests/ --alluredir=allure-results/mobile'
+                    bat 'pytest test_cases/mobile_tests/ --alluredir=allure-results'
                 }
             }
         }
