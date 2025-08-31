@@ -72,8 +72,6 @@ The pipeline is configured to:
 
 With this setup, every code update is automatically tested and reported through Jenkins, similar to how CI/CD pipelines are implemented in real-world projects.
 
-
-
 ---
 
 ## Configuration & Key Settings
@@ -94,3 +92,36 @@ All settings live in **XML** (`configuration/configuration.xml`). Here’s an ex
     <password>secret_sauce</password>
     <disabled_user>locked_out_user</disabled_user>
 </Environment>
+```
+---
+
+## Getting Started
+
+### Quick Start
+
+1. Clone the repo  
+2. Install dependencies:  
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Configure your `configuration/configuration.xml`  
+4. Run a sample test to see the Flows syntax in action:  
+
+   ```bash
+   pytest test_cases/web_tests/test_web_functionality.py
+   ```
+
+---
+
+### Sample Test Snippet
+
+```python
+def test_add_and_remove_item():
+    WebFlows.login("standard_user", "secret_sauce")
+    WebFlows.add_backpack_to_cart()
+    WebFlows.remove_item_from_inventory()
+    WebFlows.logout()
+```
+
