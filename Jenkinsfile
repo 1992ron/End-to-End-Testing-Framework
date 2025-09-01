@@ -56,6 +56,23 @@ pipeline {
             }
         }
 
+        stage('Mobile Tests') {
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    bat '''
+                        REM Run Appium server
+                        start /B appium
+
+                        REM Run mobile tests
+                        pytest test_cases\\mobile_tests\\ --alluredir=allure-results
+
+                        REM Kill Appium server
+                        taskkill /IM node.exe /F || exit 0
+                    '''
+                }
+            }
+        }
+
         stage('Electron Tests') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
