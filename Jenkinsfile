@@ -61,8 +61,7 @@ pipeline {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                     bat '''
                         REM Start Todolist Electron app
-                        cd /d "C:\\Full Stack Automation Project"
-                        start "" "Todolist-Setup.exe"
+                        start "" "C:\\Full Stack Automation Project\\Todolist-Setup.exe"
 
                         REM Run electron tests
                         pytest test_cases\\electron_app_tests\\ --alluredir=allure-results
